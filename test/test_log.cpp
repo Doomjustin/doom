@@ -19,6 +19,5 @@ int main()
     DOOM_LOG_ERROR("test {}", 12);
     DOOM_LOG_FATAL("test {}", 12);
 
-
     return EXIT_SUCCESS;
 }

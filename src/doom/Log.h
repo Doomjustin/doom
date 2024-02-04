@@ -55,36 +55,42 @@ void fatal(const std::source_location cur, std::time_t now, std::string_view mes
 
 
 #ifdef DOOM_DEBUG
+    #define DOOM_LOG_LEVEL(value) doom::log::level(value)
 
-#define DOOM_LOG_LEVEL(value) doom::log::level(value)
+    #define DOOM_LOG_PATTERN(value) doom::log::pattern(value)
 
-#define DOOM_LOG_PATTERN(value) doom::log::pattern(value)
+    #define DOOM_LOG_DEBUG(...) \
+        doom::log::debug(std::source_location::current(), \
+                         std::time(nullptr), \
+                         std::format(__VA_ARGS__))
 
-#define DOOM_LOG_DEBUG(...) \
-    doom::log::debug(std::source_location::current(), std::time(nullptr), std::format(__VA_ARGS__))
+    #define DOOM_LOG_INFO(...)  \
+        doom::log::info(std::source_location::current(), \
+                        std::time(nullptr), \
+                        std::format(__VA_ARGS__))
 
-#define DOOM_LOG_INFO(...)  \
-    doom::log::info(std::source_location::current(), std::time(nullptr), std::format(__VA_ARGS__))
+    #define DOOM_LOG_WARN(...)  \
+        doom::log::warning(std::source_location::current(), \
+                           std::time(nullptr), \
+                           std::format(__VA_ARGS__))
 
-#define DOOM_LOG_WARN(...)  \
-    doom::log::warning(std::source_location::current(), std::time(nullptr), std::format(__VA_ARGS__))
+    #define DOOM_LOG_ERROR(...) \
+        doom::log::error(std::source_location::current(), \
+                         std::time(nullptr), \
+                         std::format(__VA_ARGS__))
 
-#define DOOM_LOG_ERROR(...) \
-    doom::log::error(std::source_location::current(), std::time(nullptr), std::format(__VA_ARGS__))
-
-#define DOOM_LOG_FATAL(...) \
-    doom::log::fatal(std::source_location::current(), std::time(nullptr), std::format(__VA_ARGS__))
-
+    #define DOOM_LOG_FATAL(...) \
+        doom::log::fatal(std::source_location::current(), \
+                         std::time(nullptr), \
+                         std::format(__VA_ARGS__))
 #else
-
-#define DOOM_LOG_LEVEL(value)
-#define DOOM_LOG_PATTERN(value)
-#define DOOM_LOG_DEBUG(...)
-#define DOOM_LOG_INFO(...)
-#define DOOM_LOG_WARN(...)
-#define DOOM_LOG_ERROR(...)
-#define DOOM_LOG_FATAL(...)
-
+    #define DOOM_LOG_LEVEL(value)
+    #define DOOM_LOG_PATTERN(value)
+    #define DOOM_LOG_DEBUG(...)
+    #define DOOM_LOG_INFO(...)
+    #define DOOM_LOG_WARN(...)
+    #define DOOM_LOG_ERROR(...)
+    #define DOOM_LOG_FATAL(...)
 #endif // !DOOM_DEBUG
 
 #endif // DOOM_LOG_H

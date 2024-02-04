@@ -1,16 +1,32 @@
-configure_file(Version.h.in Version.h)
+set(DOOM_INCLUDE_DIR ${PROJECT_SOURCE_DIR}/src)
 
-# 这是个demo
+configure_file(Version.h.in ${CMAKE_CURRENT_SOURCE_DIR}/Version.h)
+
 add_library(doom STATIC
         Log.cpp
         Log.h
+        Charset.h
+        log/LogAppender.h
+        log/LogFormatter.cpp
+        log/LogFormatter.h
+        log/LogLevel.h
+        log/LogEvent.h
+        log/Logger.cpp
+        log/Logger.h
+        log/StdoutLogAppender.cpp
+        log/StdoutLogAppender.h
+        log/FileLogAppender.cpp
+        log/FileLogAppender.h
+        log/LogLevel.cpp
 )
 
 # 提供给用户的include目录
 target_include_directories(doom INTERFACE
-    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>
+    $<BUILD_INTERFACE:${DOOM_INCLUDE_DIR}>
     $<INSTALL_INTERFACE:include/> # 允许使用相对路径，这里是相对于安装路径的相对路径
 )
+
+target_include_directories(doom PUBLIC ${DOOM_INCLUDE_DIR})
 
 # 开启编译器features和options
 target_link_libraries(doom PUBLIC cpp-compiler-flags)
@@ -34,5 +50,5 @@ set_target_properties(doom PROPERTIES
 
 # 如果是Debug构建，则添加对应的定义
 target_compile_definitions(doom PUBLIC
-    $<$<CONFIG:Debug>:TEMPLATE_DEBUG> # 当有类似于DEBUG宏的东西时，很有用
+    $<$<CONFIG:Debug>:DOOM_DEBUG> # 当有类似于DEBUG宏的东西时，很有用
 )

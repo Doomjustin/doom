@@ -9,6 +9,6 @@ target_compile_features(cpp-compiler-flags INTERFACE
 )
 
 target_compile_options(cpp-compiler-flags INTERFACE
-    "$<${gcc_like_cxx}:$<BUILD_INTERFACE:-Wall;-Wextra;-Wshadow;-Wformat=2;-Wunused>>"
+    "$<${gcc_like_cxx}:$<BUILD_INTERFACE:-Wall;-Wextra;-Wshadow;-Wformat=2;-Wunused;-Wformat-nonliteral>>"
     "$<${msvc_cxx}:$<BUILD_INTERFACE:-W3>>"
 )

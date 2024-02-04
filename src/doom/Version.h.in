@@ -1,0 +1,14 @@
+#ifndef DOOM_VERSION_H
+#define DOOM_VERSION_H
+
+namespace doom {
+
+static constexpr int FTD_VERSION = @PROJECT_VERSION@;
+static constexpr int FTD_VERSION_MAJOR = @PROJECT_VERSION_MAJOR@;
+static constexpr int FTD_VERSION_MINOR = @PROJECT_VERSION_MINOR@;
+
+static constexpr const char* PROJECT_DIR = "@PROJECT_SOURCE_DIR@";
+
+} // namespace doom
+
+#endif // DOOM_VERSION_H

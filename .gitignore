@@ -51,4 +51,5 @@ debug/
 # customer
 bin/
 lib/
-third-party/
+src/doom/Version.h
+log/

@@ -2,27 +2,28 @@
 #include "log/Logger.h"
 #include "log/StdoutLogAppender.h"
 #include "log/FileLogAppender.h"
-#include "doom/Version.h"
+#include "Version.h"
 
 #include <filesystem>
+#include <atomic>
 
 namespace doom::log {
 
 namespace internal {
 
-static bool IS_INITIALIZED = false;
+// C++20之后，默认构造函数等同于设置ATOMIC_FLAG_INIT
+static std::atomic_flag lock{};
 
 Logger& default_logger(std::string name)
 {
     static Logger root_logger{ std::move(name) };
 
-    if (!IS_INITIALIZED) {
+    if (!lock.test_and_set(std::memory_order_relaxed)) {
         static std::filesystem::path root_log_file_path{doom::PROJECT_DIR };
         root_log_file_path /= "log/root.log";
 
         root_logger.add_appender(std::make_unique<StdoutLogAppender>());
         root_logger.add_appender(std::make_unique<FileLogAppender>(root_log_file_path.string()));
-        IS_INITIALIZED = true;
     }
 
     return root_logger;

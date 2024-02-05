@@ -151,6 +151,13 @@ public:
     }
 };
 
+class PercentageItem: public LogFormatter::FormatItem {
+public:
+    void format(std::ostream& os, [[maybe_unused]] const LogEvent& event) const noexcept override
+    {
+        os << PERCENTAGE;
+    }
+};
 
 LogFormatter::LogFormatter(std::string pattern)
   : pattern_{ std::move(pattern) }
@@ -188,7 +195,7 @@ void LogFormatter::parse()
             fmt_.emplace_back(make_item(item_flag));
 
             ++cur_pos;
-            // 定义了subpattern
+            // 解析subpattern
             if (pattern_[cur_pos] == LEFT_BRACKET) {
                 auto right_bracket_pos = pattern_.find(RIGHT_BRACKET, cur_pos);
                 if (right_bracket_pos == std::string::npos) {
@@ -213,6 +220,7 @@ void LogFormatter::parse()
     }
 }
 
+// 每次只在初始化时Parse一遍，初始化完成后，fmt_就不会再变动，所以这个方式应该不存在性能上的问题
 std::unique_ptr<LogFormatter::FormatItem> LogFormatter::make_item(char flag)
 {
     switch (flag) {
@@ -244,6 +252,8 @@ std::unique_ptr<LogFormatter::FormatItem> LogFormatter::make_item(char flag)
         return std::make_unique<FiberIDItem>();
     case 'N':
         return std::make_unique<ThreadNameItem>();
+    case '%':
+        return std::make_unique<PercentageItem>();
     default:
         return std::make_unique<StringItem>("<<ERROR>>");
     }

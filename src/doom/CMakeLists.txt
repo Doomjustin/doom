@@ -18,6 +18,8 @@ add_library(doom STATIC
         log/FileLogAppender.cpp
         log/FileLogAppender.h
         log/LogLevel.cpp
+        Configuration.h
+        Configuration.cpp
 )
 
 # 提供给用户的include目录
@@ -29,7 +31,10 @@ target_include_directories(doom INTERFACE
 target_include_directories(doom PUBLIC ${DOOM_INCLUDE_DIR})
 
 # 开启编译器features和options
-target_link_libraries(doom PUBLIC cpp-compiler-flags)
+target_link_libraries(doom PUBLIC
+        cpp-compiler-flags
+        nlohmann_json::nlohmann_json
+)
 
 set_target_properties(doom PROPERTIES
         CXX_STANDARD 20

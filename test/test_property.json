@@ -1,0 +1,7 @@
+{
+  "log": {
+    "name": "test logger",
+    "level": "debug",
+    "pattern": "%d{%Y-%m-%d %H:%M:%S}: %m%n"
+  }
+}

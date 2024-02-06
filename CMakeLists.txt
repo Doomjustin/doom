@@ -14,9 +14,12 @@ list(APPEND CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake)
 include(CppStandard)
 # include(Submodule)
 
-# 当且仅当这是主项目时，构建测试
-if (CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
-    add_subdirectory(test)
-endif()
+add_subdirectory(third-party/json)
 
 add_subdirectory(src/doom)
+
+
+# 当且仅当这是主项目时，构建测试
+if (CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
+	add_subdirectory(test)
+endif()

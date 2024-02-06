@@ -17,3 +17,6 @@
 
 add_executable(test-log test_log.cpp)
 target_link_libraries(test-log PRIVATE doom)
+
+add_executable(test-config test_config.cpp)
+target_link_libraries(test-config PRIVATE doom)

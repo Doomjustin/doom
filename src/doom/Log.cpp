@@ -2,7 +2,7 @@
 #include "log/Logger.h"
 #include "log/StdoutLogAppender.h"
 #include "log/FileLogAppender.h"
-#include "Version.h"
+#include "StaticInfo.h"
 
 #include <filesystem>
 #include <atomic>

@@ -1,11 +1,14 @@
 set(DOOM_INCLUDE_DIR ${PROJECT_SOURCE_DIR}/src)
 
-configure_file(Version.h.in ${CMAKE_CURRENT_SOURCE_DIR}/Version.h)
+configure_file(StaticInfo.in ${CMAKE_CURRENT_SOURCE_DIR}/StaticInfo.h)
 
 add_library(doom STATIC
         Log.cpp
         Log.h
         Charset.h
+        StaticInfo.h
+        Configuration.h
+        Configuration.cpp
         log/LogAppender.h
         log/LogFormatter.cpp
         log/LogFormatter.h
@@ -18,8 +21,6 @@ add_library(doom STATIC
         log/FileLogAppender.cpp
         log/FileLogAppender.h
         log/LogLevel.cpp
-        Configuration.h
-        Configuration.cpp
 )
 
 # 提供给用户的include目录

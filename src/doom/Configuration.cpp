@@ -1,6 +1,6 @@
 #include "Configuration.h"
 
-#include "Version.h"
+#include "StaticInfo.h"
 
 #include <fstream>
 

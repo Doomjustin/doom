@@ -51,5 +51,5 @@ debug/
 # customer
 bin/
 lib/
-src/doom/Version.h
+src/doom/StaticInfo.h
 log/

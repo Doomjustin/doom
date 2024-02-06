@@ -1,4 +1,4 @@
-#ifndef DOOM_VERSION_H
+#ifndef DOOM_STATICINFO_H
 #define DOOM_VERSION_H
 
 namespace doom {
@@ -11,4 +11,4 @@ static constexpr const char* PROJECT_DIR = "@PROJECT_SOURCE_DIR@";
 
 } // namespace doom
 
-#endif // DOOM_VERSION_H
+#endif // DOOM_STATICINFO_H
